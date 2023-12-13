@@ -1,0 +1,869 @@
+Node is a runtime environment. 
+
+A runtime environment is a structure in which a program executes.
+
+If we have a JS file and want to execute it, all the software that
+will help execute it form part of that runtime environment.
+
+Back in the day we could only execute JS code in the browser. But thanks
+to node.js we can do that in a terminal.
+
+We'll use node.js to code servers.
+
+Node JS is async oriented. An async event executes independently form
+the main application (background processes). When we ask for information
+to a webpage, or when we create a new user, you can notice that the 
+page does not freeze. This is because those processes are async.
+
+Example: when we request information from a database.
+
+------
+
+a sync event executes as a main part of the application. These processess
+stop the application until they stop doing what they are supposed to do.
+(the app freezes)
+
+Characteristics of node.js
+    * Open source
+    * Multiplatform and based on the v8 engine google uses
+
+V8 engine is a javascript engine developed by the chromium project
+for google chrome. It gives us that runtime environment node gives us
+in the terminal, but this engine is given to us in the browser.
+
+Node is based in this runtime environment to execute our code 
+in the terminal.
+
+A javascript engine is software that executes JS code
+
+------
+
+Basic consepts
+
+> client-server architecture --> it is a model in which the server
+sends resources to the device that requests for them (client)
+
+comunication between the browser and server
+
+> front end developing --> development that the user sees and 
+interacts with
+
+> back end developing --> server developing (what the user doesn't see)
+
+servers comunicate with databases, they get the info from there
+
+> full stack --> both at the same time 
+
+> protocols --> rules that allow two entities to comunicate in the web
+(to help the client to understand what the server is saying and 
+viceversa)
+
+> database --> group of structured data under a specific context, you can
+request this information (user info, etc)
+
+the comunication is such as this... 
+
+client <----> server <----> database
+
+we'll develop the servers that will process the browser's requests
+
+websites can be static or dynamic
+
+static ---> once the resources where recieved there is no need for more
+interaction with the user (nothing will update, for example) --> like
+a blog
+
+dynamic ---> that interaction with the user is present. The user
+can do as many requests as the website allows it
+
+------
+
+node.js applications
+
+> for back end developing and API developing
+
+> API ---> application programming interface: an intermediate
+between different programs
+
+> APIs are interfaces between programs (one in the client side, the
+other in the server side). These will allow us connect the application 
+that is executing in the browser with the server .--> and so request
+information from the database or work with it (the database)
+
+inside the server we can process those requests --> not all we'll
+do in a server will include a database
+
+------
+
+node.js advantages ---> it allows us to develop scalable applications 
+in real time
+
+> scalable ---> its performance is proportional to its use (the more work
+the better the performance - it addapts to the need)
+
+> real-time application ---> stablishes a bidirectional and dynamic 
+conection between the server and client (the client requests information
+and the server returns it)
+
+node.js ISN'T a programming language, neither a framework, or a library
+
+node.js is a runtime environment - it'll give us the environment and 
+tools to execute our JS code in the terminal
+
+------
+
+REPL ---> read, eval, print, loop
+
+you use node to execute JS in visual studio code 
+
+------
+
+Node.js modules
+
+an functionality which is organized in one or more javaascript files. This
+functionality can be REUSED in an application (we separate the project
+in parts to make it easies for us)
+
+we can avoid repeating code, we can reuse code, bugs are easier to find,
+code is easier to modify, and to add new functionalities
+
+------
+
+node.js built in modules ---> you can directly use without installing them,
+they come with node
+
+> examples ---> http, https fs (file system), os (operating system), path
+> and many many many many more
+
+console momdule ---> built-in module that implements similar functionality
+to that of a console in a web browser (console.log() <--- yeap!)
+it allows us to execute JS code and see the result in the terminal
+
+some useful methods
+
+console.log()
+console.warn()
+console.error()
+console.assert()
+console.table()
+
+process module ---> provides information about the node.js process
+beign executed, it also has some control over that process
+
+you can call it with console.log(process)
+
+console.log(process); // that's a lot of detailed info!
+console.log(process.env); // descrives the runtime environment of the program
+
+with process you can access the arguments passed to the terminal
+when you type in the terminal nodde app.js 6 7 8 for example 
+that is converted into an array 
+[node, app.js, 6, 7, 8]
+console.log(process.argv) // we recieve an array with two paths
+where node is, and where the project node.js is
+now if you type in the terminal node app.js 7 8 you get back
+an array also including those two numbers
+
+// you can access individual values
+console.log(process.argv[2]);
+console.log(process.argv[3]);
+
+// to get all values
+for(let i = 2; i < process.argv.length; i++) {
+    console.log(process.argv[i]);
+}
+
+// you can also know how much memory is beign used
+console.log(process.memoryUsage());
+
+os module ---> to obtain information about the os in which the 
+program is beign executed
+
+// os module is not global, you have to import it with require()
+
+const os = require("os");
+// type ---> to access the os type 
+console.log(os.type()); // returns "Windows_NT" in my case
+
+// homedir ---> to access the home directory of the user
+console.log(os.homedir())
+
+// uptime ---> to know how long has the os been executing (in seconds)
+console.log(os.uptime());
+
+// userInfo ---> info about the user
+console.log(os.userInfo());
+
+timers module ---> contains functions that execute code after 
+a certain period of time
+
+setTimeout() ---> to execute code after a specific amount of miliseconds
+setTimeout(the function to execute, the time I'll take, argument(s) to pass to the function after the time set)
+if we have more than one argument you just separate them with a comma
+
+function mostraTema(tema) {
+    console.log(`estoy aprendiendo ${tema}`);
+}
+
+setTimeout(mostraTema, 2000, "Node.js"); // two seconds
+
+function sumar(a, b) {
+    console.log(a + b);
+}
+
+setTimeout(sumar, 2000, 4, 6)
+
+sestImmediate() ---> to execute async code in the next iteration 
+of a cicle of events as soon as posible
+// setImmediate(function, arg1, arg2); 
+// the function will execute when the cycle of events
+// tells us it is time for that function to execute
+// can have more arguments
+// it executes AFTER sync code
+
+function mostrarTema(tema1, tema2) {
+    console.log(`Estoy aprendiendo ${tema1} y ${tema2}`);
+}
+
+console.log("Antes de setImmediate"); // first
+
+setImmediate(mostrarTema, "Node.js", "python"); // last 
+
+console.log("Despues de setImmediate"); // second
+
+setInterval() ---> to execute code an infinite number of times
+with a specific delay (set in miliseconds)
+
+// every certain amount of miliseconds the code will execute infinitelly
+// setInterval(function, interval, arg1, arg2); ---> from one to more args
+
+function mostrarTema(tema1, tema2) {
+    console.log(`Estoy aprendiendo ${tema1} y ${tema2}`);
+}
+
+setInterval(mostrarTema, 1500, "Node.js", "python"); 
+
+// every second and a half the function mostrarTema will execute
+
+fs module (file system) ---> useful functionalities to work 
+with the file system
+
+// useful operations: 
+    * read a file
+    * modify a file
+    * copy a file
+    * delete a file
+    * change the name of a file
+    * create a file
+
+all methods of the fs module are sync (wont stop the execution
+of the program) ---> KEEP IN MIND that you can choose sync versions
+of these methods adding the word "sync" to their names
+
+for example fs.rename() ---> fs.renameSync()
+
+// first include the module
+
+const fs = require("fs");
+
+// to read
+
+fs.readFile("index.html", "utf-8", (err, contenido) => {
+    // parameters ---> error if there are problems reading file
+    // the other refers to its contents
+
+    // if err is not null
+    if (err) {
+        console.log(err); // show error
+    }
+
+    // else read contents of file
+
+    else {
+        console.log(contenido);
+    }
+});
+
+// we can also STOP the execution of the function if there's an error
+// for that we use throw
+
+const fs = require("fs");
+
+fs.readFile("inde.html", "utf-8", (err, contenido) => {
+    // if error, the function stops (we use thow for that)
+
+    if(err) {
+        throw err; 
+    }
+    else console.log(contenido);
+});
+
+// renaming a file
+const fs = require("fs");
+
+fs.rename("index.html", "main.html", (err) => {
+    // if error 
+    if (err) {
+        throw err; // to stop execution of the function
+    }
+
+    console.log("Nombre cambiado exitosamente!");
+}); 
+
+// add content at the end of a file (append)
+
+const fs = require("fs");
+
+fs.appendFile("index.html", "<p>Hola!</p>", (err) => {
+    // if error
+    if (err) {
+        throw err;
+    }
+
+    console.log("archivo actualizado!");
+});
+
+// replace content of a file (creates the file if it doesn't exist)
+
+const fs = require("fs");
+
+fs.writeFile("index.html", "new content", (err) => {
+    // if err
+
+    if (err) {
+        throw err;
+    }
+    console.log("Contenido reemplazado exitosamente!")
+});
+
+// delete a file
+
+const fs = require("fs");
+
+fs.unlink("index2.html", (err) => {
+    if (err) {
+        throw err; 
+    }
+    console.log("Archivo eliminado!");
+});
+
+// we can work with files in the server responding to the operations
+of the client/user
+
+NPM AND NODE.JS
+
+npm ---> biggest software file in the whole world that contains
+packages that you can install and use with Node.js (also, it is a 
+command line tool)
+
+package ---> file or directory descrived by a package.json file, the
+package can be posted in the npm registry
+
+module ---> any file or directory in the node_modules directory that
+can be imported with require(). node_modules is created automatically
+anytime you work with npm
+
+to include a module with require it must be a JS file or a folder
+with a package.json file that contains a property "main"
+
+only the modules that have a package.json file are packages
+
+dependency ---> package that other package needs to work properly
+
+to generate a package.json file with costum values ---> npm init 
+to generate with default values ---> npm init -y or --yes
+
+in both cases you can freely edit the package.json file 
+
+what is .json?
+
+the json format is based on the javascript sysntax, it is very used to 
+transmit and store information
+
+< ------ INTRODUCTION TO JSON ------ >
+
+JavaScript object Notation ---> it is a text format used to store and
+transport information (usually used in webdev to transport info
+between the client and the server). This is not a programming language
+or syntax of some sort: it is a text format
+
+does it have to do anything with JavaScript? yes, it is based in the 
+notation of objects used in JavaScript... but it is simply text. We are
+representing information in a specific text format
+
+it allows us to store JS objects as text, convert object in our code into
+text that we can transmit between the client and the server. This format is
+INDEPENDENT of the language you are working with. You can use the json
+format with python, javascript, etc.
+
+the information sent from a client to a server is normally sent in 
+json format, the server knows how to interpret this format
+
+the server4 can also respond in json format to the client, for us 
+to extract the info sent by the server
+
+just as in JS objects, the data is represented in key-value pairs
+which we can refer to as "properties"
+
+{ ---> besides {} the pairs can be sorrounded by [] if it is a json array
+    "titulo": "aprendiendo node.js", ---> pairs have to be separated by ,
+    "numVisitas": 155632,
+    "numLikes": 43243,
+    "temas": ["js", "node.js"],
+    "esPublico": true
+} the data can be strings, numbers, arrays, booleans, and other objects
+the keys HAVE to be strings, but their respective values can be of 
+different types
+
+we can convert certain information represented in json into a 
+javascript object so we can use to work with that in a program
+
+we can also do the oposite ---> from a javascript object we can convert
+information into json format to transmit it
+
+to convert from json to javascript object we have the function 
+JSON.parse();
+
+< ------ install and uninstall packages with npm ------ >
+
+this part is very important to work with Express
+
+to create package.json ---> npm init or npm init --yes
+
+how do we install a package? let's say we are working in a project 
+that happens to be using Express
+
+with the command "npm install express"
+
+> in node_modules we'll find all the modules
+> package-lock.json ---> info about how the dependencies where
+install step by step and etc.
+
+express is now a dependency of you project, you installed it for some
+reason, isn't it? in the package.json generated by the "npm init" command
+you entered in the terminal you'll notice that a new key-value pair has 
+appeared, one for the dependencies, and you'll see "express" as value
+
+this is so when your project is downloaded, whoever works with it learns
+about the dependencies you needed in order to make your project work
+
+// how do we uninstall? ---> npm uninstall express
+
+if you go pack to package.json you'll notice that the 
+dependencies list is missing
+
+// how do I install the specific version of a package?
+
+> let's say I want to install the 4.15.1 version of express
+> npm install express@4.15.1
+
+this also helps to other programmers, they can work with the version
+you used while developing the program. Usually the node_module is not 
+included in github repositories ---> the package.json allows you to 
+install everything someone else has used for the project (as long as 
+it's specified in the package.json file): these dependencies can be
+installed with the "npm install" command
+
+in package.json we'll have something called "devDependencies" ---> some
+dependencies will only be used while we are developing the application,
+they're not needed when the application is live
+
+so, we can store(save) those dependencies, those packages, in a 
+special category ---> npm install express --save-dev 
+this will save it as a dependency of the application
+
+now, if we go to the package.json file, we'll see that express appears
+under the category "devDependencies"
+
+package-lock.json ---> automatically generated when npm modifies the 
+node_modules tree or package.json. I'll allow us to keep a registry of
+the dependencies tree that our package needs
+
+package-lock.json describes the generated tree so future instalations
+can generate the same exact tree - therefore, other developers
+can install EXACTLY the same dependencies
+
+name: describes the name of the package. It's the same name we
+include in package.json
+
+version: version of teh package, the same we include in package.json
+
+lockfileVersion: version of the package-lock.json file, how many times
+has it been modified
+
+packages: object that asociates the location of each package with 
+an object that contains information about that package - object that lists
+packages and displays info about them
+
+< ------ NODE.JS EVENTS ------ >
+
+what is an event? ---> an action done in the application, like an user
+interacting with a web application ---> ask for information to a database,
+add info to a database, etc
+
+node.js is based on async events 
+
+the server is always listening for requests, and when a client (browser)
+does something, requests something, to the server, that is called an 
+event ---> an action that unchains a whole process
+
+there are also events that happen insternally in a server
+
+in node, we have a specific module that allow us to 
+define our own events, besides working with the built-in ones
+
+emitters ---> objects that emit named events and call specific function
+when said events happen. Emitters are an instance of the EventEmitter class
+
+the class is the blueprints, by instancing we are using the blueprints
+to build 
+
+these objects have an .on() method to asociate a function to an event
+
+we'll call that method when we'd like to say what will happen when 
+certain even occurs. Those events have a name, so we'll asociate the name 
+of that event, and when that event happens, we'll know how to react
+
+the function executes when the event happens ---> that function 
+is denominated Event Handler
+
+to create and define our own events, in node.js we have the 
+events module. This module allow us to define, emit and listen events 
+(to know when they occur)
+
+< ------ async javascript ------ > 
+
+> promises ---> an object that represents the eventual result (or error)
+of an async operation. When an async operation starts we don't know
+how or when it will finish - we'll only know when the async process
+is finally done. 
+
+when we request something to a server we are usually working
+with promises - we don't know when we'll see the results
+
+once the promise starts it enters the pending state - from there it 
+could be either fulfilled or rejected
+
+a promise is a JS object - that object is asociated to a callback function, 
+which is a function that is executed once the async process is completed,
+to process the result
+
+callback function ---> a function that is passed as argument to another
+function and then is executed inside the external function 
+
+like in setTimeout, we specified a function inside that function - we'll
+do the same here  
+
+promises have a .then() method, with it we can decide what happens
+when the promise is completed (success - error)
+
+> .catch() ---> promise method that is executes when the promise 
+has been rejected
+
+> async/await ---> to make async processes be sync (???) it's more than 
+that but with practice you'll get the idea
+
+< ------ client/server model ------ >
+
+we use this model to access the internet and recieve
+information and resources
+
+the client sends requests to the server (which is listening)
+
+client ---> the browser from which requests are made
+
+server ---> program that is executed in a physical server to offer
+some service to the client. Sends information 
+
+the server knows the waited format in which the client sends messages in
+and viceversa, they understand eachother's "languages"
+
+the HTTP protocol defines the format of those messages
+
+protocol ---> group of rules that allow the transmission of information
+between devices in a network
+
+HTTP ---> hypertext transfer protocol
+
+to fulfill the comunication between the client and server
+there should be HTTP requests and responses
+
+when a client asks for something to a server, THAT is a request
+
+an HTTP is conformed by serveral elements that give an idea to 
+the server about what the client might be asking for
+
+- HTTP methods (what actions should be taken)
+- Path ---> tells to the server where is whatever is asked for
+- HTTP version ---> usually present
+- Headers ---> provide a bit more information
+- Body ---> if information is to be sent to the server (new user) 
+
+HEADERS ---> provides aditional information about a request
+BODY ---> contains information to be sent to a server, to be processed,
+usually that information is sent in json format. Not all requests
+include BODY, just those that send information (POST, PUT)
+
+the client will send a request in a specific format, while we, in 
+the server, with node.js, will be able to extract the information
+from that request to know what is it we have to do, how do we have to
+process that request, to respond with the adecuate information
+
+HTTPS ---> the same but safer
+
+< ------ HTTP methods ------ >
+
+when the client sends a request to the server, an HTTP method
+should be specified
+
+it is simply a verb that indicates the intention of the request
+
+the most used are GET, POST, PUT DELETE
+
+GET ---> to obtain a specific resource from the server
+POST ---> to create a new resource (create a new user, add it to
+the database)
+PUT ---> to modify a specific resurce. Make some changes in the 
+database, for example, change password, profile picture, etc
+DELETE ---> to delete a resource from a database
+
+through those HTTP methods, the client will say to the 
+server what to do
+
+HTTP responses (how the server responds to the client)
+
+once the the client sends a requests, and once the server is 
+donde processing said request, a response is sent back to the client
+
+that response has a specific structure
+
+    - status code ---> status of request, if succesful or not
+    - status text ---> to describe status 
+    - HTTP version ---> usually included
+    - Headers ---> provides a bit more information (optional)
+    - Body ---> if some content is needed to be sent to the client
+
+< ------ HTTP status code ------ > 
+
+useful for the client to know what happend with the request (if it
+succeded of if it was rejected, etc). It is a number that indicates if 
+an HTTP request was succesfully completed
+
+> informative responses ---> (100 - 199)
+
+> satisfactory ---> (200 - 299)
+
+> redirect ---> (300 - 399)
+
+> client error ---> (400 - 499)
+
+> server error ---> (500 - 599)
+
+with node.js and Express we can specify the state code of an HTTP
+response in our server |---> we'll have to work with these codes! Study!
+
+most common codes: 
+    * 200 (OK) - succesful response
+    * 400 (Bad Request) - the server could't interpret the request
+    * 404 (Not Found) - server couldn't find the requested resource
+    * 500 (Internal Server Error) - server found a situation that 
+    doesn't know how to handle
+
+< ------ your first node.js server ------ >
+
+we'll be able to create our node.js server with the HTTP module
+
+this module allows Node.js to transmit information with the HTTP protocol,
+we'll use the tools and functions defined in that module to create our server, 
+to make it listen the requests we send, and to transmit information 
+through the HTTP protocol
+
+this HTTP module allow us to create a server that LISTENS to these requests
+
+to access the module, we import it with const http = require("http");
+
+const http = require("http"); // we import the module
+
+// let's send a message to our browser
+
+// each time the server recieves a request
+// I'll execute the function we'll pass it as argument
+
+// the function will have two arguments (request, reponse)
+// that will represent the requests recieved and responses sent
+
+/*
+const servidor = http.createServer((req, res) => {
+    console.log("solicitud nueva"); 
+    res.end("Hola, mundo!"); // response method that sends response to client (finish process)
+
+    // how do we make a server listen?? through a port
+
+    // which is a virtual location in the OS in which an application 
+    // can be accessed (an application or a specific process
+    // that happens to be executing in that port)
+    // ports are represented by positive numbers 
+}); 
+*/
+
+// let's make our server be able to listen
+// as arguments the port, and a function that will define what will happen
+// when the server starts executing
+
+/*
+servidor.listen(3000, () => {
+    console.log("El servidor esta escuchando...")
+});
+*/
+
+// initialize by entering "node app.js" in the terminal
+// to access the server ---> localhost:3000
+
+// keep in mind, the function inside http.createServer() will 
+// execute each time we make a request for the server to handle
+
+> install the REST client extension to try our server/API by doing
+different kinds of requests with defferent methods and HTTP verbs
+
+< ------ URL structure ------ >
+
+> URL ---> the address to a resource in the web
+(uniform resource locator), it allow us to indicate which is the 
+website we want to obtain - it is the starting point to request
+information to the server
+
+> structure ---> let's say we have https://www.freecodecamp.org/espanol
+
+https ---> the protocol (group of rules that we'll use in the comunication 
+to access a specific resource)
+
+www ---> subdomain - additional information added at the beggining
+of the domain of a webpage - it helps the websites to organize and 
+separate information for different purposes (if it is a blog then instead
+of www. we'll do blog., if we want to create a subdomain in another language
+we can do es.)
+
+freecodecamp ---> domain (name of the page) - a UNIQUE reference to a 
+website in the internet - when you buy a domain you are the ONLY owner
+of that domain to publish our website in it 
+
+.org ---> top-level domain (.com, .net, .gov, .edu)
+
+espanol/ ---> a path in our server toward something (in our server) - an
+archive or directory in our web server. The path can have parameters to
+customize it. These parameters are part of the URL - you personalize
+through the parameters (path parameters) we separate them with / 
+
+example ---> /user/234 <--- the number is the path parameter
+
+there are other parameters: 
+
+https://www.google.com/search?q=cursos+de+node for example 
+
+the "?q=cursos+de+node" is a query parameter - a request parameter that
+aren't part of the URL per se - These parameters are used to obtain 
+dynamic content, for example to filter a list of resources - these are also
+known as "query strings", therefore with ?q=cursos+de+node we'll be able to filter
+those things from everything google has. The query parameter starts
+after the ?. the q=cursos+de+node is a key-value pair, being q the key and
+cursos+de+node the value. With a query parameter sequence we can filter
+from our server what the client is looking for. These parameters will help us
+filter the answer that we'll be sending to the client 
+
+to includo SEVERAL query parameters we separate them with a & 
+
+?q=curso+de+node&sourceid=chrome&ie=UTF-8 ---> each query parameter
+has to have its key-value pair, separated by a =
+
+we usually use query parameters to filter GET requests (to obtain
+specific resources)
+
+in node we have a powerful module to work with URLs - the url module
+
+< ------ url module ------ >
+
+you need to know how to form a URL, how to extract different parts of it
+
+// url module - let's start by create a URL object
+// first we instance the URL class (globaly available)
+// as an argument we'll pass a string that'll represent the url
+// on a real server, we'd have the url of the request
+// let's say we recieve the following url
+const miURL = new URL("https://www.ejemplo.com/cursos/programacion?ordenar=vistas&nivel=1");
+// when this url finds its way to our server, we can proccess it 
+// and obtain each part of it to work with it in our server as 
+// however we need to
+
+// get host
+// since it is an object we can access to that property 
+console.log(miURL.hostname); // www.ejemplo.com - it was extracted
+
+// get path
+console.log(miURL.pathname); // /cursos/programacion - it was extracted
+
+// get query parameters
+// this time the returned value is a little bit different
+// because it is an object
+console.log(miURL.searchParams); // URLSearchParams { 'ordenar' => 'vistas', 'nivel' => '1' }
+// how do we access those values? remember that we are talking about an object
+console.log(miURL.searchParams.get("ordenar"));
+console.log(miURL.searchParams.get("nivel"));
+
+< ------ routing in Node.js ------ >
+
+> Routing ---> to manage the requests from the client BASED on 
+certain criteria (method and path) - routing means to create 
+different routes for the server, so the server knows what to do 
+to handle a specific request - as if we created a map and told 
+the server "handle this request for this certain route this 
+certain way" 
+
+> criteria 
+    * method of the HTTP request - this way the server knows what to do
+    (GET, POST, PUT, DELETE, etc...)
+    * the path of the HTTP request - this way the server knows which 
+    specific resource will be used or modified or deleted
+
+> Routing ---> method + Path + how to handle the request; what to do, 
+where to do it, and HOW to do it. 
+
+Like if we were saying to the server "if you recive a GET request - in
+/cursos - do this... ", or "if you recive a POST request - in
+/cursos - do this... "
+
+< ------ express ------ >
+
+> a node.js framework for backend development - makes the process faster
+
+> characteristics 
+    * gives us a mechanism to define the Routing 
+    * high performance 
+    * it allows us to develop Node.js applications faster with far more
+    concise code
+
+> basic concepts
+    * CRUD ---> represents the basic operation that can be done with the 
+    stored information (with a database)
+        * CREATE ---> POST
+        * READ ---> GET
+        * UPDATE ---> PUT
+        * DELETE ---> DELETE
+    * API ---> application programming interface ---> software interface 
+    that allows two or more programs to be in contact with each other - it
+    let's us develop software that offers some service to other software - 
+    the API is not directly used by the user, but rather by the programmer
+    to implement their program
+
+    client <---> API <---> server
+
+    in an API, the server has functions that are available for use, under
+    specific conditions - the client can access those functions 
+    throught the API
+
+    normally. when we recieve and send information through an API
+    we do it in JSON format
+
+> REST ---> software architecture style for distributed hypermedia systems 
+like the World Wide Web - Representational state transfer
+
+> RESTful API is an API which is based on REST

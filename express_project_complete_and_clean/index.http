@@ -1,0 +1,77 @@
+POST http://localhost:3000/api/courses/mathematics HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 6,
+    "title": "learn trigonometry",
+    "theme": "trigonometry",
+    "views": 45656,
+    "level": "basic"
+}
+
+###
+
+PUT http://localhost:3000/api/courses/mathematics/2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 2,
+    "title": "6 exercises of basic calculus",
+    "theme": "calculus",
+    "views": 4223,
+    "level": "basic"
+}
+
+###
+
+PATCH http://localhost:3000/api/courses/mathematics/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "advanced statistics",
+    "views": 239988
+}
+
+###
+
+DELETE http://localhost:3000/api/courses/mathematics/2 HTTP/1.1
+
+###
+
+POST http://localhost:3000/api/courses/coding HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 5,
+    "title": "learning basic node.js",
+    "language": "node.js",
+    "views": 23564,
+    "level": "basic"
+}
+
+###
+
+PUT http://localhost:3000/api/courses/coding/2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 2,
+    "title": "6 exercises of basic python",
+    "language": "python",
+    "views": 34627,
+    "level": "basic"
+}
+
+###
+
+PATCH http://localhost:3000/api/courses/coding/2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "intermedium javascript",
+    "views": 865746
+}
+
+###
+
+DELETE http://localhost:3000/api/courses/coding/2 HTTP/1.1

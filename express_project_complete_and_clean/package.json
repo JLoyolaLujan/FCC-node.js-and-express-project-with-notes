@@ -1,0 +1,14 @@
+{
+  "name": "express_project_complete_and_clean",
+  "version": "1.0.0",
+  "description": "node.js and express basics ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "José",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
